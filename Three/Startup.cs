@@ -44,6 +44,9 @@ namespace Three
             //调用IClock接口 返回 ChinaClock对象
             //services.AddSingleton<IClock, ChinaClock>();
             services.AddSingleton<IClock, UtcClock>();
+
+            services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddSingleton<IDepartmentService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,10 +69,10 @@ namespace Three
             app.UseStaticFiles();
 
             //强制用户使用https协议
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             //身份认证中间件
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
            //路由中间件
             app.UseRouting();
@@ -91,10 +94,10 @@ namespace Three
                 //注册路由模板 或 通过
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{Controller=Department}/{Action=index}/{id?}");
 
                 //直接在controller类上添加标签或属性/特性 进行路由配置
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
             });
         }
     }
