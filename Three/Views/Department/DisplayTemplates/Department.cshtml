@@ -1,0 +1,24 @@
+﻿@model Three.Models.Department
+@using Three
+@using Microsoft.Extensions.Options
+@inject IOptions<ThreeOptions> options //在View中使用依赖注入自定义的强类型配置文件
+
+<tr>
+    @if (Model.EmployeeCount > options.Value.BoldDepartmentEmployeeCountThreshold)
+    {
+        <td><strong>@Model.Name</strong></td>
+    }
+    else
+    {
+        <td>@Model.Name</td>
+    }
+
+    <td>@Model.Location</td>
+    <td>@Model.EmployeeCount</td>
+
+    <td>
+        <a asp-controller="Employee" asp-action="Index" asp-route-DepartmentId="@Model.Id">
+            Employees
+        </a>
+    </td>
+</tr>

@@ -20,9 +20,20 @@ namespace Three
             
             CreateHostBuilder(args).Build().Run();
         }
-        //createDefaultBuilder 时 IApplicationBuilder 注入
+        /// <summary>
+        /// createDefaultBuilder 时 IApplicationBuilder 注入
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context,configBuilder) =>
+                {
+                    //清除默认json文件
+                    configBuilder.Sources.Clear();
+                    //添加新的json配置文件
+                    configBuilder.AddJsonFile("nick.json");
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

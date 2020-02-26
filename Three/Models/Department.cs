@@ -10,7 +10,9 @@ namespace Three.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
-        //员工数量
+        /// <summary>
+        /// 员工数量
+        /// </summary>
         public int EmployeeCount { get; set; }
     }
 }
